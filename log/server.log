@@ -1,0 +1,3 @@
+2013/01/16 16:14:40.328560 no config file found {appRoot()}
+2013/01/16 16:30:21.339243 &{map[development:map[pool:25 encoding:utf8 socket:/var/run/mysqld/mysqld.sock database:skyeye_development adapter:mysql2 reconnect:false password:admin123 username:root] test:map[socket:/var/run/mysqld/mysqld.sock pool:25 password:admin123 encoding:utf8 database:skyeye_test adapter:mysql2 reconnect:false username:root] production:map[adapter:mysql2 password:admin123 username:root database:skyeye_production pool:25 socket:/var/run/mysqld/mysqld.sock encoding:utf8 reconnect:false] apollo:map[database://192.168.1.164/orcl password:apollo_qwerty123456 username:qqw_company adapter:oracle_enhanced]]}
+2013/01/16 16:38:58.418869 open ./conf/database1.yml: no such file or directory

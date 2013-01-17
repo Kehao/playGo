@@ -8,7 +8,9 @@ import (
   "github.com/kylelemons/go-gypsy/yaml"
   "io/ioutil"
   "github.com/ziutek/mymysql/mysql"
-  _ "github.com/ziutek/mymysql/native" 
+  //_ "github.com/ziutek/mymysql/native" 
+  _ "github.com/ziutek/mymysql/godrv"
+  "playGo/funDb"
 )
 var (
   config *yaml.File
@@ -49,28 +51,53 @@ mysql.Result) {
 func init(){
   initlogAndConfig()
 }
+type Notices struct{
+  Id int
+  SubjectId int
+  SubjectType string
+}
 
 func main(){
-  username, _ := config.Get("development.username")
-  password, _ := config.Get("development.password")
-  database, _ := config.Get("development.database")
+  //username, _ := config.Get("development.username")
+  //password, _ := config.Get("development.password")
+  //database, _ := config.Get("development.database")
 
-  db := mysql.New("tcp", "", "127.0.0.1:3306", username, password, database)
-  checkError(db.Connect())
+  //db := mysql.New("tcp", "", "127.0.0.1:3306", username, password, database)
+  //checkError(db.Connect())
 
 
-  sel, err := db.Prepare("SELECT * FROM notices n where subject_id = ? LIMIT 0,1000")
+  //sel, err := db.Prepare("SELECT * FROM notices n where subject_id = ? LIMIT 0,1000")
+  //checkError(err)
+
+  //rows, res := checkedResult(sel.Exec(1))
+  //id := res.Map("id")
+  //subjectType := res.Map("subject_type")
+
+  //for _, row := range rows {
+  //  fmt.Printf(row.Str(id))
+  //  fmt.Printf(row[id])
+  //  fmt.Printf(row.Str(subjectType))
+  //}
+
+  //_, _ = db.Query("select 1") 
+  db, err := funDb.OpenMysql("mymysql", "tcp:localhost:3306*skyeye_development/root/admin123")
   checkError(err)
 
-  rows, res := checkedResult(sel.Exec(1))
-  id := res.Map("id")
-  subjectType := res.Map("subject_type")
-
-  for _, row := range rows {
-    fmt.Printf(row.Str(id))
-    fmt.Printf(row[id])
-    fmt.Printf(row.Str(subjectType))
+  var notices []Notices
+  qi := funDb.SqlQueryInfo{
+    Fields: "id, subject_id, subject_type",
+    Where:  "id=2",
+    //Params: []interface{}{0},
+    Limit:  10,
+    Offset: 0,
+    Group:  "",
+    Order:  "id desc",
   }
+  err1 := db.GetStructs(&notices, qi)
+  checkError(err1)
+ 
+  fmt.Println(notices)
+
 }
 
 

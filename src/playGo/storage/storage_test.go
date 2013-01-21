@@ -1,4 +1,4 @@
-package snapshot
+package storage
 import (
   "testing"
   "github.com/sdegutis/go.assert"
@@ -10,7 +10,7 @@ func TestCheckRootDir(t *testing.T){
   storage := &FileStorage{
     Root:root,
   }
-  exist,err := storage.checkRootDir()
+  exist,err := storage.CheckRootDir()
   if !exist{
     t.Error(err)
   }
@@ -20,7 +20,7 @@ func TestCheckRootDir(t *testing.T){
   fileExist,_ := storage.Exist(fileName)
   assert.Equals(t,fileExist,true)
 
-  storage.checkFile("log/app1.go")
+  storage.CheckFile("log/app1.go")
   logfileExist,_ := storage.Exist("log/app1.go")
   assert.Equals(t,logfileExist,true)
   storage.RemoveAll()

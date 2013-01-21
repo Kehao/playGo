@@ -1,4 +1,4 @@
-package snapshot
+package storage
 import(
   "playGo/utils"
   "os"
@@ -12,9 +12,9 @@ type FileStorage struct{
   Root string 
 }
 
-func (s *FileStorage) checkFile(filePath string) (bool,error){
+func (s *FileStorage) CheckFile(filePath string) (bool,error){
   if exist,_ := s.Exist(filePath);!exist{
-    _,err := s.checkRootDir() 
+    _,err := s.CheckRootDir() 
     checkError(err)
     err1 := os.MkdirAll(path.Dir(s.Retrieve(filePath)),0700)
     checkError(err1)
@@ -25,7 +25,7 @@ func (s *FileStorage) checkFile(filePath string) (bool,error){
   return true,nil
 }
 
-func (s *FileStorage) checkRootDir() (bool,error){
+func (s *FileStorage) CheckRootDir() (bool,error){
   if Exist,_ := utils.FileExists(s.Root);!Exist{
     err := os.MkdirAll(s.Root,0700)
     if err == nil{
@@ -56,7 +56,7 @@ func (s *FileStorage) Exist(filePath string) (bool,error) {
   return utils.FileExists(s.Retrieve(filePath))
 }
 
-
+func checkError(err error) { if err != nil { panic(err) } }
 
 
 

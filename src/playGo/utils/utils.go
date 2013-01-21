@@ -149,3 +149,4 @@ func LoadJsonFile(filePath string) (map[string]interface{}, error) {
   }
   return conf, nil
 }
+func CheckError(err error) { if err != nil { panic(err) } }

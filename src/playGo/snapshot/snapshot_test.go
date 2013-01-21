@@ -5,5 +5,5 @@ import (
 )
 
 func TestInitLogAndConfig(t *testing.T){
-  //t.Error(config) 
+  //t.Error(Config) 
 }

@@ -40,6 +40,9 @@ func initLogAndConfig(logPath,confPath string) {
   }
   Config = yaml.Config(string(confFile))
 }
+
+func checkError(err error) { if err != nil { panic(err) } }
+
 func init(){
   appStorage.CheckFile(*logPath)
   appStorage.CheckFile(*confPath)

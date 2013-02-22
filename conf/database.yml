@@ -46,4 +46,4 @@ apollo:
   adapter: oracle_enhanced
   database: //192.168.1.164/orcl
   username: qqw_company
-  password: apollo_qwerty123456
+  password: 

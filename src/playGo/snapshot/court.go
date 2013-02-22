@@ -3,7 +3,7 @@ import (
   "playGo/storage"
   "path"
   "fmt"
-  "os/exec"
+  //"os/exec"
 )
 
 type Court struct {
@@ -20,14 +20,14 @@ func NewCourt(cutycaptArgs map[string]string,companyId,crimeId string) *Court {
   }
 }
 
-func (court *Court) Run() error {
+func (court *Court) Run() string {
   court.storage.CheckRootDir()
   //cmd := exec.Command(court.command.string())
-  cmd:= exec.Command("xvfb-run","--server-args='-screen 0, 1024x768x24'","/home/qiu/work/playGo/CutyCapt/CutyCapt --out=1.png --url=http://www.baidu.com --js-can-open-windows=on")
-  out, err := cmd.Output()
-  fmt.Println(out)
-  fmt.Println(err)
-  return err//cmd.Run()
+  //cmd:= exec.Command("xvfb-run","--server-args='-screen 0, 1024x768x24'","/home/qiu/work/playGo/CutyCapt/CutyCapt --out=1.png --url=http://www.baidu.com --js-can-open-windows=on")
+  //out, err := cmd.Output()
+  //fmt.Println(out)
+  //fmt.Println(err)
+  return court.command.string()//cmd.Run()
 }
 
 
